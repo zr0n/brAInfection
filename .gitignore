@@ -1,0 +1,29 @@
+# binarios / builds
+dist/
+dist-nuitka/
+.nuitka/
+.nuitka-cache/
+.pyi/
+*.exe
+*.dll
+*.pyd
+*.so
+
+# gerados com segredos embutidos
+_fused_payload.py
+
+# auxiliares de build/teste locais
+_bootstrap_pyi.py
+_bootstrap_nuitka.py
+_serve_nuitka.py
+_test_flow.py
+_test_watchdog.py
+BruceBAD/
+
+# logs / cache
+*.log.txt
+log.txt
+nuitka-crash-report.xml
+_serve_url.txt
+__pycache__/
+*.pyc
